@@ -1,9 +1,11 @@
 import React from 'react'
 import "./style.css";
+
+
 const Login = () => {
   return (
     <div>
-     <div className='login'>
+     <div className='w-11 login'>
          <div className='loginWrapper'>
          <form className="loginBox" >
            

@@ -1,16 +1,16 @@
 import React from 'react'
 import "./style.css";
+
+
+import { Button } from 'primereact/button';
+        
 const Register = () => {
+
   return (
     <div>
       <div className='login'>
          <div className='loginWrapper'>
          <form className="loginBox" >
-            <input placeholder="Username"
-             required 
-            
-             className="loginInput" 
-             />
             <input placeholder="Email"
              required 
             
@@ -25,16 +25,16 @@ const Register = () => {
              className="loginInput" 
              type="password"
              />
-            <input placeholder="Password Again"
+            <input placeholder="Confirm Password"
              required 
              
              className="loginInput"
              type="password" 
              />
-            <button className="loginButton"type="submit">Sign Up</button>
-            <button className="loginRegisterButton">
-              Log into Account
-            </button>
+             
+              <Button  label="Submit" severity="info" />
+              <Button  label="Login" severity="success" />
+          
           </form>
          </div>
       </div>

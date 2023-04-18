@@ -1,27 +1,42 @@
 import React from 'react'
 import "./style.css"
+import { Card } from 'primereact/card';
+
+import { Button } from 'primereact/button';
+        
+
 const GameIntro = () => {
   return (
-    <div>
-      <div className='gameintro'></div>
-      <div className='gamewrapper'>
-      <div className='title'>
-        <h1>Welcome to Tresure Hunt</h1>
-      </div>
-      <div className='gameobjective'>
-        <h3>Objective of Game</h3>
-      The puzzle example I provided involves multiple soft skills, including problem-solving, critical thinking, and attention to detail.
+    <div className=' flex flex-column justify-content-center align-items-center'>
 
-To successfully complete the puzzle, the player must use their problem-solving skills to decipher each clue and solve each challenge. They must also use critical thinking to analyze the clues and come up with a strategy to progress through the castle and ultimately find the treasure.
+      <div className='__image w-full  flex flex-column justify-content-center align-items-center '>
+        <div className='mt-0'>
+          <h1 className='__welcomeText'>Welcome to Tresure Hunt</h1>
+        </div>
 
-In addition, attention to detail is critical in this puzzle as the player must carefully observe their surroundings to find hidden clues and objects that will help them solve each challenge. These soft skills are important in many areas of life and work, including education, business, and personal development.
-<div className='play'>
-<button className='btn1'>Play</button>
-</div>
-   
       </div>
+
+      <div className="card w-10 mt-5">
+        <Card title="Objective of Game">
+           <p className="m-0 font-normal __font">
+            The puzzle example I provided involves multiple soft skills,
+            <p className="mt-3 font-normal __font">including problem-solving, critical thinking, and attention to detail.
+
+              To successfully complete the puzzle,
+              the player must use their problem-solving
+              skills to decipher each clue and solve each challenge. They must also use critical thinking to analyze the clues and come up with a strategy to progress through the castle and ultimately find the treasure.
+            </p>
+            <p className="mt-3 font-normal __font">In addition, attention to detail is critical in this puzzle as the player must carefully observe their surroundings to find hidden clues and objects that will help them solve each challenge. These soft skills are important in many areas of life and work, including education, business, and personal development.</p>
+
+          </p>
+        </Card>
+
+        <div className='flex justify-content-center mt-5'>
+           <Button className='w-5' label="Let's Enter In The game" severity="warning" />
+        </div>
+
       </div>
-      
+
     </div>
   )
 }

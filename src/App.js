@@ -13,9 +13,22 @@ import GameResult from './User/pages/GameResult';
 import Login from './User/pages/auth/login';
 import Clue from './User/pages/Clue';
 
+
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css";
+
+//icons
+import "primeicons/primeicons.css";                                         
+import Header from './components/Header';
+        
+
 function App() {
   return (
     <Router>
+       <Header />
         <Routes>
            <Route exact path="/" element={<Register/>}/>
            <Route exact path="/login" element={<Login/>}/>
