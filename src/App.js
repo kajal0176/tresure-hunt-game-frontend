@@ -7,7 +7,7 @@ import {
   Navigate
 } from "react-router-dom";
 import Register from './User/pages/auth/Register';
-import GameIntro from './User/pages/GameInto';
+import GameIntro from './User/pages/GameIntro';
 import GameProblem from './User/pages/GameProblem';
 import GameResult from './User/pages/GameResult';
 import Login from './User/pages/auth/login';

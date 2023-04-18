@@ -1,0 +1,41 @@
+.gameintro{
+    width: 100vw;
+   
+    background-color: #f0f2f5;
+   
+    
+}
+.gamewrapper{
+     width: 50%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.title{
+    background-color: coral;
+  box-shadow: 10px 10px 5px lightblue;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+}
+.gameobjective{
+    background-color: aqua;
+    box-shadow: 10px 10px 5px lightblue;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+}
+.play{
+  align-items: center;
+}
+.btn1{
+    width: 70px;
+    background-color: bisque;
+    font-weight: bold;
+    border-radius: 5px;
+    border-style: none;
+   height: 40px;
+   font-size: medium;
+}
