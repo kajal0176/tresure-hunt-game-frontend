@@ -1,0 +1,33 @@
+
+.__img{
+    background-image: url("img1.jpg");
+    position: absolute;
+    height: 40%;
+    width: 100%;
+    color: aliceblue;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  }
+
+  .__imgDark{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.416);
+    height: 100%;
+    color: aliceblue;
+}
+.__index{
+    position: absolute;
+    
+    height: 100%;
+
+}
+.__fontSize{
+    font-size: 50px;
+}
+.__top{
+    top: 230px;
+}
+.__input{
+    width: 500px !important;
+}

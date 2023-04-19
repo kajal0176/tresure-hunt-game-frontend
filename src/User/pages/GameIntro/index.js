@@ -3,9 +3,13 @@ import "./style.css"
 import { Card } from 'primereact/card';
 
 import { Button } from 'primereact/button';
+import { useNavigate } from 'react-router-dom';
+
         
 
 const GameIntro = () => {
+  const navigate = useNavigate()
+
   return (
     <div className=' flex flex-column justify-content-center align-items-center'>
 
@@ -32,7 +36,9 @@ const GameIntro = () => {
         </Card>
 
         <div className='flex justify-content-center mt-5'>
-           <Button className='w-5' label="Let's Enter In The game" severity="warning" />
+           <Button className='w-5' label="Let's Enter In The game" onClick={()=>{
+            navigate('/gameProblem')
+           }} severity="warning" />
         </div>
 
       </div>

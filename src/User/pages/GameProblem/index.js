@@ -2,10 +2,13 @@ import React from 'react'
 import { Card } from 'primereact/card';
 import "./style.css"
 import { Button } from 'primereact/button';
+import { useNavigate } from 'react-router-dom';
+
         
 
 
 const GameProblem = () => {
+  const navigate = useNavigate()
   return (
     <div className='w-full m-auto __img'>
       <div className='__imgDark w-full'></div>
@@ -22,7 +25,9 @@ const GameProblem = () => {
 
           </Card>
           <div className='flex justify-content-center mt-5'>
-           <Button className='w-2' label="Play" severity="warning" />
+           <Button className='w-2' label="Play" severity="warning"  onClick={()=>{
+            navigate('/clue')
+           }} />
           </div>
 
        </div>
