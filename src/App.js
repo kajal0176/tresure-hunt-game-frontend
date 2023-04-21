@@ -23,11 +23,12 @@ import "primereact/resources/primereact.min.css";
 //icons
 import "primeicons/primeicons.css";                                         
 import Header from './components/Header';
+import Dashboard from './Admin/pages/Dashboard';
         
 
 function App() {
   return (
-    <Router>
+    <div className='App'>
        <Header />
         <Routes>
            <Route exact path="/" element={<Register/>}/>
@@ -35,9 +36,10 @@ function App() {
            <Route path="/gameIntro" element={<GameIntro/>}/>
            <Route path="/gameProblem" element={<GameProblem/>}/>
            <Route path ="/gameResult" element={<GameResult/>}/>
-           <Route path ="/clue" element={<Clue/>}/>              
+           <Route path ="/clue" element={<Clue/>}/>
+           <Route path ="/admin" element={<Dashboard/>}/>             
         </Routes>
-    </Router>
+     </div>
   );
 }
 

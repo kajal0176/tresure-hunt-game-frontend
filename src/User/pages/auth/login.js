@@ -1,12 +1,15 @@
 import React from 'react'
 import "./style.css";
+import { Card } from 'primereact/card';
 
 
 const Login = () => {
+
+
   return (
     <div>
      <div className='w-11 login'>
-         <div className='loginWrapper'>
+         <Card >
          <form className="loginBox" >
            
             <input placeholder="Email"
@@ -29,7 +32,7 @@ const Login = () => {
               Log into Account
             </button>
           </form>
-         </div>
+         </Card>
       </div>
     </div>
   )

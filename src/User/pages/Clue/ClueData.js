@@ -30,12 +30,12 @@ export const clueData = [
         que:`Here's a message encoded in Morse code you have to  decode it to reach the next clue:
 
         .... .. ... / .-- --- .-. .-.. .-.. / -.-. --- -- -- ..- ..- ..-. ..-. / -.-- --- ..- .-. / -.-. --- ..- .--. .--. .-.. . / --. ..- --. ..`,
-        ans:'This world could be your cup of tea.',
+        ans:'This world could be your cup of tea',
         url:'',
     },
     {
         que:`I'm a winding path that leads you through the trees. Follow me and you'll find adventure, wherever that may be. What am I?`,
-        ans:'A hiking trail.',
+        ans:'A hiking trail',
         url:'',
     },
     {
@@ -45,17 +45,17 @@ export const clueData = [
     },
     {
         que:`I'm a gnarled and twisted tree, with roots that spread far and wide. If you're brave enough to explore me, you might find a surprise inside. What am I?`,
-        ans:'hollow tree.',
+        ans:'hollow tree',
         url:'',
     },
     {
         que:`I am a towering waterfall, with water cascading down. If you're willing to take the plunge, you'll feel like you've won a crown. What am I?`,
-        ans:' A cliff diving spot.',
+        ans:' A cliff diving spot',
         url:'',
     },
     {
         que:`I am a natural bridge, spanning a deep and wide ravine. If you're looking for an adventure, cross me and you'll feel like you're living the dream. What am I?`,
-        ans:'natural bridge.',
+        ans:'natural bridge',
         url:'',
     },
     {

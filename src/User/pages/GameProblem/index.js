@@ -12,8 +12,8 @@ const GameProblem = () => {
   return (
     <div className='w-full m-auto __img'>
       <div className='__imgDark w-full'></div>
-       <div className='z-1 mt-8 absolute w-full m-auto '>
-          <Card title="Problem " className='w-9 __card m-auto 1 mt-5 '>
+       <div className='z-1 mt-8 absolute w-full m-auto pt-6 '>
+          <Card title="Problem " className='w-9 __card m-auto 1 mt-8 '>
            <p className="m-0 font-normal __font">
            A group of treasure hunters are searching for a lost treasure in a remote jungle. They have found an old map that leads to the treasure, but the map is incomplete and they must solve a series of clues to find the missing pieces and ultimately discover the location of the treasure.
             </p>

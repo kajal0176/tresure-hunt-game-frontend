@@ -51,7 +51,7 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
 
     console.log(control)
     
-    if(clue.ans.toLowerCase()==e.ans.toLowerCase()){
+    if(clue.ans.trim().toLowerCase()==e.ans.trim().toLowerCase()){
       setClueText(numarray[clueNum])
       console.log('true')
       settrueVisible(true)
