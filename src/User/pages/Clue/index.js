@@ -3,6 +3,9 @@ import { clueData } from './ClueData'
 import { useForm, Controller } from "react-hook-form";
 
 import { InputText } from 'primereact/inputtext';
+
+import { Steps } from 'primereact/steps';
+        
         
 import "./style.css"
 import { Card } from 'primereact/card';
@@ -10,10 +13,10 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils'
 import { Dialog } from 'primereact/dialog';
 import { useNavigate } from 'react-router-dom';
+import { useInterval } from 'primereact/hooks';
+import { updateUserInfo } from '../../../reducer/user.slice';
+import { useDispatch } from 'react-redux';
 
-    
-        
-   
 const Clue = () => {
   const navigate = useNavigate()
 const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clue']
@@ -26,6 +29,40 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
  const [gameovervisible,setgameoverVisible]=useState(false);
  const [wrongAnsCount,setWrongAnsCount]=useState(1);
  const [deadpoints,setDeadpoints]=useState(0);
+ const [seconds, setSeconds] = useState(0);
+ const [active, setActive] = useState(true);
+ const [min,setMin] = useState(0)
+ const dispatch = useDispatch();
+
+
+ const items = [
+  {
+      label: 'First Clue'
+  },
+  {
+      label: 'Second clue'
+  },
+  {
+      label: 'Third clue'
+  },
+  {
+      label: 'Fourth Clue'
+  },
+  {
+    label: 'Fifth Clue'
+  }
+];
+
+useInterval(
+  () => {
+      setSeconds((prevSecond) => (prevSecond === 59 ? 0 : prevSecond + 1));
+      if (seconds !=0 && seconds%59==0) {
+        setMin((prevMin) => ( prevMin + 1));
+      }
+  },
+  1000,
+  active
+);
 
 
   useEffect(()=>{
@@ -62,11 +99,30 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
       setWrongAnsCount(wrongAnsCount+1)
       if (wrongAnsCount%3==0) {
         setDeadpoints(deadpoints+1)
+        let ac=100/deadpoints+1
+       let time= `${min}:${seconds}`
+        const data = {
+            email:user.email,
+            avgTime:time,
+            deadCounts:deadpoints,
+            acc:ac,
+            softSkills:'',
+        }
+        dispatch(updateUserInfo(data))
+        .unwrap()
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+  
       }
         
     }
     reset()
   }
+
 
   useEffect(()=>{
     console.log(wrongAnsCount,deadpoints)
@@ -84,6 +140,7 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
     if (clueNum==5) {
       navigate('/gameResult')
     }
+
   },[clueNum,clues])
 
   const nextClue = ()=>{
@@ -113,10 +170,17 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
         </Dialog>
         <div className='w-full m-auto __img'>
             <div className='__imgDark w-full ' ></div>
+
             <div className='mt-0 __index w-full  flex flex-column justify-content-center align-items-center'>
-              <h1 className='__fontSize'>{clueText}</h1>
+              
+              <Card className='__box w-1 flex  mb-6  justify-content-center align-items-center'> <h1 className=' '> {`${min}:${seconds}`}</h1></Card>
             </div>
               <div className='absolute __top w-full flex flex-column justify-content-center align-items-center'>
+           
+              <div className='w-10 mb-8 '>
+                <Steps model={items}  activeIndex={clueNum}  className='w-full'/>
+              </div>
+             
               <Card className='w-10 flex justify-content-center'>
                     <p className="m-0">
                       {clue && clue.que}

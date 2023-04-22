@@ -3,12 +3,36 @@ import { Card } from 'primereact/card';
 import "./style.css"
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
-
-        
+import { useSelector } from "react-redux";
+import { useEffect } from 'react';      
+import { useDispatch } from "react-redux";
+import { postUserInfo } from '../../../reducer/user.slice';
 
 
 const GameProblem = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const {user} = useSelector(state => state.auth);
+
+  useEffect(()=>{
+    const data = {
+        email:user.email,
+        avgTime:'',
+        deadCounts:'',
+        acc:'',
+        softSkills:'',
+    }
+    dispatch(postUserInfo(data))
+    .unwrap()
+    .then((res)=>{
+        console.log(res)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+  },[])
+
   return (
     <div className='w-full m-auto __img'>
       <div className='__imgDark w-full'></div>

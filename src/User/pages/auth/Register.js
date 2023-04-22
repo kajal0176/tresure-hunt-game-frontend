@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { InputText } from "primereact/inputtext";
 import { useNavigate } from "react-router-dom";
 import authSlice, { signup } from '../../../reducer/auth.slice';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const Register = () => {
 
@@ -17,7 +18,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {isLogedIn} = useSelector(state => state.auth);
+  const {isLogedIn,user,loading} = useSelector(state => state.auth);
 
   useEffect(()=>{
     if (isLogedIn) {
@@ -50,12 +51,8 @@ const Register = () => {
         .unwrap()
         .then((res) => {
           console.log(res)
-          toast.current.show({
-            severity: "error",
-            detail: res.data.message,
-            life: 3000,
-          });
-          //navigate("/gameIntro");
+          navigate("/login");
+        
         })
         .catch((err) => {
           console.log(err)
@@ -71,8 +68,11 @@ const Register = () => {
 
   return (
     <div className='flex justify-content-center align-items-center mt-5'>
-          <Toast ref={toast} />
-         <Card className='w-5 mt-5'>
+         <Toast ref={toast} />
+
+        {
+          loading? <ProgressSpinner  className='mt-8 pt-8'/>:     
+          <Card className='w-5 mt-5'>
             <form onSubmit={handleSubmit(onSubmit)} >
               <div className="field flex flex-column justify-content-center p-3">
                 <label htmlFor="userName">Email</label>
@@ -142,7 +142,8 @@ const Register = () => {
                <Button  label="Login" className='w-full' severity="success" />   
               
             </div>
-         </Card> 
+         </Card>
+         }         
     </div>
   )
 }

@@ -4,7 +4,7 @@ import axiosInstance from "./axios.js";
 
 const API_LOGIN = async (userCredentials) => {
     try {
-        const resp = await axios.post('/login', userCredentials);
+        const resp = await axiosInstance.post('/login', userCredentials);
         return resp;
     } catch (err) {
         console.log(err)
@@ -14,7 +14,7 @@ const API_LOGIN = async (userCredentials) => {
 
 const API_SIGNUP = async (userCredentials) => {
     try {
-        const resp = await axios.post('http://localhost:5000/api/signup', userCredentials);
+        const resp = await axiosInstance.post('/signup', userCredentials);
         return resp;
     } catch (err) {
         console.log(err)

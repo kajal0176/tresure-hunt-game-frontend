@@ -26,8 +26,24 @@
     font-size: 50px;
 }
 .__top{
-    top: 230px;
+    top: 200px;
 }
 .__input{
     width: 500px !important;
+}
+.__box{
+    background-color: rgba(200, 220, 241, 0.477) !important;
+    color: rgb(240, 244, 248) !important;
+    height: 50px;
+   
+}
+.p-steps .p-steps-item .p-menuitem-link{
+    background: none !important;
+    color: aliceblue !important;
+}
+.p-steps .p-steps-item.p-highlight .p-steps-title{
+    color: aliceblue !important;
+}
+.p-steps .p-steps-item .p-menuitem-link .p-steps-title{
+    color: aliceblue !important;
 }

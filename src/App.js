@@ -1,11 +1,13 @@
 
-import './App.css';
+import { useEffect, useState } from 'react'
+import './App.css'
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
-} from "react-router-dom";
+  useNavigate,
+  useLocation,
+} from 'react-router-dom'
 import Register from './User/pages/auth/Register';
 import GameIntro from './User/pages/GameIntro';
 import GameProblem from './User/pages/GameProblem';
@@ -24,20 +26,49 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";                                         
 import Header from './components/Header';
 import Dashboard from './Admin/pages/Dashboard';
-        
+import { ProtectedRoute } from './components/ProtectedRoutes';
+import Home from './User/pages/Home';
+import { setUser } from './reducer/auth.slice';
+import parseJwt from './utils/authUtils'
+  
+import { useDispatch } from 'react-redux'
 
 function App() {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    const currentPath = location.pathname
+    const token = localStorage.getItem('token')
+    if (token) {
+      const user = parseJwt(token)
+      dispatch(setUser(user))
+      navigate(currentPath)
+    }
+  }, [])
+
   return (
     <div className='App'>
-       <Header />
         <Routes>
-           <Route exact path="/" element={<Register/>}/>
-           <Route exact path="/login" element={<Login/>}/>
+            <Route
+              path='/'
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            >
            <Route path="/gameIntro" element={<GameIntro/>}/>
            <Route path="/gameProblem" element={<GameProblem/>}/>
            <Route path ="/gameResult" element={<GameResult/>}/>
            <Route path ="/clue" element={<Clue/>}/>
-           <Route path ="/admin" element={<Dashboard/>}/>             
+           <Route path ="/admin" element={<Dashboard/>}/> 
+           </Route>
+           
+           <Route exact path="/register" element={<Register/>}/>
+           <Route exact path="/login" element={<Login/>}/>            
         </Routes>
      </div>
   );

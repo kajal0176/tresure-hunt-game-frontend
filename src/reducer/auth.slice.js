@@ -51,10 +51,12 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      const token = action.payload.token;
+      console.log(action)
+      const token = action.payload.data.token;
       localStorage.setItem('token', token);
       axiosInstance.defaults.headers.common["authorization"] = token;
       const user = parseJwt(token);
+      console.log(user)
       state.user = user
       state.isLogedIn = true;
       state.loading = false;
@@ -66,24 +68,15 @@ const authSlice = createSlice({
       state.loading = false
     });
 
-     builder.addCase(signup.fulfilled, (state, action) => {
-        // const token = action.payload.token;
-        // localStorage.setItem('token', token);
-        // axiosInstance.defaults.headers.common["authorization"] = token;
-        // const user = parseJwt(token);
-        // state.user = user
-        if (action.payload.data.status) {
-          state.isLogedIn = true;
-          state.loading = false;
-        }else{
+    builder.addCase(signup.fulfilled, (state, action) => {
+        
         state.isLogedIn = false;
         state.loading = false;
-        }
      });
-      builder.addCase(signup.pending, (state) => {
+    builder.addCase(signup.pending, (state) => {
         state.loading = true;
       });
-      builder.addCase(signup.rejected, (state, action) => {
+    builder.addCase(signup.rejected, (state, action) => {
         state.loading = false
       });
    
