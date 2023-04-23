@@ -20,22 +20,19 @@ const GameResult = () => {
     dispatch(getActiveUser(user.id))
     .unwrap()
     .then((res)=>{
-       console.log(res)
+      //  console.log(res)
     })
     .catch((err)=>{
-        console.log(err)
+        // console.log(err)
     })
 
 },[])
 
-
+const wrongansbody=( rowdata)=>{
+ return rowdata.wrongAnsCount-1
+}
   
-  const userInfoColumns = [
-    {field: 'clue', header: 'Clue'},
-    {field: 'time', header: 'Completion Time'},
-    {field: 'wrongAnsCount', header: 'Wrong Ans Count'}, 
-    
-];
+ 
 
 
 const userInfoTable = ()=>{
@@ -53,10 +50,14 @@ const userInfoTable = ()=>{
               
                   </div>    
                   <div className="card mt-5">
-                      <DataTable value={activeUser.userClueInfo} tableStyle={{ minWidth: '50rem' }}>
-                          {userInfoColumns.map((col, i) => (
-                              <Column key={col.field} field={col.field} header={col.header} />
-                          ))}
+                      <DataTable value={activeUser.userClueInfo} tableStyle={{ minWidth: '65rem' }}>
+                         
+                              <Column key={'clue'} field={'clue'} header={'Clue'} />
+                              <Column key={'time'} field={'time'} header={'Completion Time'} />
+                              <Column key={'wrongAnsCount'} field={'wrongAnsCount'} header={'Wrong Ans Count'} body={
+                                wrongansbody
+                              } />
+                          
                       </DataTable>
                   </div>
 

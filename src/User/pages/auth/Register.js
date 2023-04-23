@@ -41,7 +41,7 @@ const Register = () => {
 
 
   const onSubmit = (data) => {
-    console.log(data)
+    // console.log(data)
     const __data = {
       email:data.email,
       password:data.password

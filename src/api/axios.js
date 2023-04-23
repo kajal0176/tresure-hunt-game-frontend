@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000/api",
+    baseURL: "https://tresure-hunt-game-apis.onrender.com/api",
     headers: {
         Accept: "*/*",
         "Content-Type": "application/json"

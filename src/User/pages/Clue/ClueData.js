@@ -68,6 +68,31 @@ export const clueData = [
         ans:'disney world',
         url:'',
     },
+    {
+        que:'I am a shelter in the woods, a place to rest your head. My walls are made of bark and leaves, my roof is overhead. What am I??',
+        ans:'treehouse',
+        url:'',
+    },
+    {
+        que:`I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?`,
+        ans:'fire',
+        url:'',
+    },
+    {
+        que:'What goes up but never comes down?',
+        ans:'age',
+        url:'',
+    },
+    {
+        que:'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?',
+        ans:'echo',
+        url:'',
+    },
+    {
+        que:'I am taken from a mine and shut up in a wooden case, from which I am never released, and yet I am used by almost every human being. What am I?',
+        ans:'pencil lead',
+        url:'',
+    },
    
     
 ]

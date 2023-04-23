@@ -55,12 +55,12 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      console.log(action)
+      // console.log(action)
       const token = action.payload.data.token;
       localStorage.setItem('token', token);
       axiosInstance.defaults.headers.common["authorization"] = token;
       const user = parseJwt(token);
-      console.log(user)
+      // console.log(user)
       state.user = user
       state.isLogedIn = true;
       state.loading = false;

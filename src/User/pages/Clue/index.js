@@ -42,7 +42,7 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
    dispatch(getActiveUser(user.id))
    .unwrap()
    .then((res)=>{
-    console.log(res.data.userInfo)
+    // console.log(res.data.userInfo)
     const _userInfo =  res.data.userInfo
     setClueNum(_userInfo.clueNum)
     setWrongAnsCount(_userInfo.wrongAnsCount)
@@ -53,9 +53,9 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
  useEffect(()=>{
   let time =  localStorage.getItem('time')
   if (time) {
-    console.log(time)
+    // console.log(time)
     let minSec =  time.split(":")
-    console.log(minSec)
+    // console.log(minSec)
     setMin(parseInt(minSec[0]))
     setSeconds(parseInt(minSec[1]))
   }
@@ -103,11 +103,11 @@ useInterval(
         return this.splice(Math.floor(Math.random() * this.length), 1)[0];
     }, clueData.slice());
 
-    console.log(result);
+    // console.log(result);
     setClues(result)
 
     //setClue(result[clueNum])
-    console.log(clue)
+    // console.log(clue)
   },[])
 
   const { control, handleSubmit, formState: { errors },reset } = useForm({
@@ -182,15 +182,15 @@ useInterval(
   }
 
   const onSubmit = (e)=>{
-    console.log(e)
+    // console.log(e)
 
-    console.log(control)
+    // console.log(control)
     
     if(clue.ans.trim().toLowerCase()==e.ans.trim().toLowerCase()){
       setUserInfo(true)
       setClueText(numarray[clueNum])
       setWrongAnsCount(1)
-      console.log('true')
+      // console.log('true')
       settrueVisible(true)
     }
     else{
@@ -208,7 +208,7 @@ useInterval(
 
 
   useEffect(()=>{
-    console.log(wrongAnsCount,deadpoints)
+    // console.log(wrongAnsCount,deadpoints)
     if(deadpoints==2){
       setgameoverVisible(true)
       setInterval(() => {
@@ -223,7 +223,7 @@ useInterval(
     setClueText(numarray[clueNum])
     settrueVisible(false)  
     setWrongAnsCount(1)
-    console.log(clues,clue,clueNum)
+    // console.log(clues,clue,clueNum)
     if (clueNum==5) {
       navigate('/gameResult')
 
@@ -240,7 +240,7 @@ useInterval(
     if (deadpoints==2) {
       setUserInfo(true)
     }else{
-      console.log(activeUser)
+      // console.log(activeUser)
       if (activeUser) {
         setUserInfo(false)
       }

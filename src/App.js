@@ -7,6 +7,7 @@ import {
   Route,
   useNavigate,
   useLocation,
+  Navigate,
 } from 'react-router-dom'
 import Register from './User/pages/auth/Register';
 import GameIntro from './User/pages/GameIntro';
@@ -42,7 +43,12 @@ function App() {
     if (token) {
       const user = parseJwt(token)
       dispatch(setUser(user))
+      if(user.role=='admin'){
+        navigate('/admin')
+      }
+      else{
       navigate(currentPath)
+      }
     }
   }, [])
 

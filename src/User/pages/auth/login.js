@@ -23,7 +23,12 @@ const Login = () => {
 
   useEffect(()=>{
     if (isLogedIn) {
+      if(user.role=='admin'){
+        navigate('/admin')
+      }
+      else{
       navigate("/gameIntro");
+      }
     }
   },[isLogedIn])
 
@@ -50,12 +55,17 @@ const Login = () => {
        dispatch(login( __data))
         .unwrap()
         .then((res) => {
-          console.log(res)
+          // console.log(res)
+          if(user.role=='admin'){
+            navigate('/admin')
+          }
+          else{
           navigate("/gameIntro");
+          }
         
         })
         .catch((err) => {
-          console.log(err)
+          // console.log(err)
           toast.current.show({
             severity: "error",
             detail: err.message,

@@ -13,17 +13,19 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {
-
+    const {userInfo,registeredUser} = useSelector(state => state.user);
+    const {user} = useSelector(state => state.auth);
     useEffect(()=>{
-        if (user.role != 'admin') {
+       
+        if (user.role !=='admin') {
+            // console.log(user)
           navigate('/gameIntro')
         }
-    },[])
+    },[user])
 
     const navigate = useNavigate();
     const dispatch =  useDispatch();
-    const {userInfo,registeredUser} = useSelector(state => state.user);
-    const {user} = useSelector(state => state.auth);
+   
     const options = [ 'User Game Info','Registerded User'];
     const [value, setValue] = useState(options[0]);
     const registeredUserColumns = [
@@ -33,13 +35,9 @@ const Dashboard = () => {
 
 
 
-    const userInfoColumns = [
-        {field: 'clue', header: 'Clue'},
-        {field: 'time', header: 'Completion Time'},
-        {field: 'wrongAnsCount', header: 'Wrong Ans Count'}, 
-        
-    ];
-  
+    const wrongansbody=( rowdata)=>{
+        return rowdata.wrongAnsCount-1
+       }
     useEffect(()=>{
         dispatch(getRegisteredUser())
         .unwrap()
@@ -47,7 +45,7 @@ const Dashboard = () => {
            //console.log(res)
         })
         .catch((err)=>{
-            console.log(err)
+            // console.log(err)
         })
 
         dispatch(getUserInfo())
@@ -56,7 +54,7 @@ const Dashboard = () => {
            //console.log(res)
         })
         .catch((err)=>{
-            console.log(err)
+            // console.log(err)
         })
 
     },[])
@@ -91,9 +89,11 @@ const Dashboard = () => {
                         </div>    
                         <div className="card mt-5">
                             <DataTable value={_userInfo.userClueInfo} tableStyle={{ minWidth: '50rem' }}>
-                                {userInfoColumns.map((col, i) => (
-                                    <Column key={col.field} field={col.field} header={col.header} />
-                                ))}
+                            <Column key={'clue'} field={'clue'} header={'Clue'} />
+                              <Column key={'time'} field={'time'} header={'Completion Time'} />
+                              <Column key={'wrongAnsCount'} field={'wrongAnsCount'} header={'Wrong Ans Count'} body={
+                                wrongansbody
+                              } />
                             </DataTable>
                         </div>
     
@@ -110,7 +110,8 @@ const Dashboard = () => {
 
   return (
     <div className='w-11 m-auto  '>
-
+     {user.role=='admin' &&
+     <div>
         <div className="card mt-6">
             <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
         </div>
@@ -121,7 +122,11 @@ const Dashboard = () => {
           {
             value === 'Registerded User' ? registerdUserTable() :<></>
          }
-           
+         </div>
+        } 
+        {user.role=='user' &&
+        <h1>Only admin can access this page....</h1>
+        }
     </div>
   )
 }
