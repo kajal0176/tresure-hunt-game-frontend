@@ -16,19 +16,26 @@ const GameProblem = () => {
 
   useEffect(()=>{
     const data = {
-        email:user.email,
-        avgTime:'',
-        deadCounts:'',
-        acc:'',
-        softSkills:'',
+      email:user?.email,
+      userInfo:{
+          avgTime:0,
+          deadCounts:0,
+          acc:0,
+          softSkills:'',
+          clueNum:0,
+          wrongAnsCount:1,
+          deadCounts:0
+      },
+      userClueInfo:[]
     }
+
     dispatch(postUserInfo(data))
     .unwrap()
     .then((res)=>{
-        console.log(res)
+        //console.log(res)
     })
     .catch((err)=>{
-        console.log(err)
+        //console.log(err)
     })
 
   },[])

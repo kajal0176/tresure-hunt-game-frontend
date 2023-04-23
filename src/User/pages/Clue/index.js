@@ -14,8 +14,9 @@ import { classNames } from 'primereact/utils'
 import { Dialog } from 'primereact/dialog';
 import { useNavigate } from 'react-router-dom';
 import { useInterval } from 'primereact/hooks';
-import { updateUserInfo } from '../../../reducer/user.slice';
+import { getActiveUser, getUserInfo, updateUserInfo } from '../../../reducer/user.slice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const Clue = () => {
   const navigate = useNavigate()
@@ -33,6 +34,38 @@ const numarray=['First Clue','Second clue','Third clue','Fourth Clue','Fifth Clu
  const [active, setActive] = useState(true);
  const [min,setMin] = useState(0)
  const dispatch = useDispatch();
+ const {user} = useSelector(state => state.auth);
+ const {userInfo,activeUser} = useSelector(state => state.user);
+
+
+ useEffect(()=>{
+   dispatch(getActiveUser(user.id))
+   .unwrap()
+   .then((res)=>{
+    console.log(res.data.userInfo)
+    const _userInfo =  res.data.userInfo
+    setClueNum(_userInfo.clueNum)
+    setWrongAnsCount(_userInfo.wrongAnsCount)
+    setDeadpoints(_userInfo.deadCounts) 
+   })
+ },[])
+
+ useEffect(()=>{
+  let time =  localStorage.getItem('time')
+  if (time) {
+    console.log(time)
+    let minSec =  time.split(":")
+    console.log(minSec)
+    setMin(parseInt(minSec[0]))
+    setSeconds(parseInt(minSec[1]))
+  }
+ },[])
+
+ useEffect(()=>{
+  let time= `${min}:${seconds}`
+  localStorage.setItem('time',time)
+ },[seconds,min])
+
 
 
  const items = [
@@ -83,40 +116,90 @@ useInterval(
     }
   });
 
+  const setUserInfo = (isAnsTrue)=>{
+   
+      
+        let ac=100/deadpoints+1
+        let time= `${min}:${seconds}`
+
+        const data = {
+          email:user?.email,
+        }
+
+        if (deadpoints == 1) {
+          data['userInfo']={
+            avgTime:time,
+            clueNum:clueNum,
+            clue:numarray[clueNum],
+            deadCounts:deadpoints,
+            wrongAnsCount,
+            acc:'50%',
+            softSkills:'problem solving',      
+          }
+        }else if( deadpoints == 2){
+          data['userInfo']={
+            avgTime:time,
+            clueNum:clueNum,
+            clue:numarray[clueNum],
+            deadCounts:deadpoints,
+            wrongAnsCount,
+            acc:'33%',
+            softSkills:'attention to detail',      
+          }
+        }
+        else{
+          data['userInfo']={
+            avgTime:time,
+            clueNum:clueNum,
+            clue:numarray[clueNum],
+            deadCounts:deadpoints,
+            wrongAnsCount,
+            acc:'100%',
+            softSkills:'problem solving and attention to detail',      
+          }
+        }
+       
+
+        if (isAnsTrue) {
+          data['userClueInfo'] = {
+            clue:numarray[clueNum],
+            clueNum,
+            time,
+            wrongAnsCount
+          }
+        }
+       
+        dispatch(updateUserInfo(data))
+        .unwrap()
+        .then((res)=>{
+           
+            dispatch(getActiveUser(user.id))
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+
+  }
+
   const onSubmit = (e)=>{
     console.log(e)
 
     console.log(control)
     
     if(clue.ans.trim().toLowerCase()==e.ans.trim().toLowerCase()){
+      setUserInfo(true)
       setClueText(numarray[clueNum])
+      setWrongAnsCount(1)
       console.log('true')
       settrueVisible(true)
     }
     else{
-      console.log('false')
+     
       setfalseVisible(true)
       setWrongAnsCount(wrongAnsCount+1)
+      //setUserInfo(false)
       if (wrongAnsCount%3==0) {
         setDeadpoints(deadpoints+1)
-        let ac=100/deadpoints+1
-       let time= `${min}:${seconds}`
-        const data = {
-            email:user.email,
-            avgTime:time,
-            deadCounts:deadpoints,
-            acc:ac,
-            softSkills:'',
-        }
-        dispatch(updateUserInfo(data))
-        .unwrap()
-        .then((res)=>{
-            console.log(res)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-  
       }
         
     }
@@ -128,10 +211,14 @@ useInterval(
     console.log(wrongAnsCount,deadpoints)
     if(deadpoints==2){
       setgameoverVisible(true)
+      setInterval(() => {
+        navigate('/gameIntro')
+      }, 3000);
     }
-  },[wrongAnsCount])
+  },[wrongAnsCount,deadpoints])
 
   useEffect(()=>{
+   
     setClue(clues[clueNum])
     setClueText(numarray[clueNum])
     settrueVisible(false)  
@@ -139,13 +226,27 @@ useInterval(
     console.log(clues,clue,clueNum)
     if (clueNum==5) {
       navigate('/gameResult')
+
     }
 
   },[clueNum,clues])
 
+
   const nextClue = ()=>{
-    setClueNum(clueNum+1) 
+    setClueNum(clueNum+1)
+     
   }
+  useEffect(()=>{   
+    if (deadpoints==2) {
+      setUserInfo(true)
+    }else{
+      console.log(activeUser)
+      if (activeUser) {
+        setUserInfo(false)
+      }
+    
+    }
+  },[clueNum,deadpoints])
 
   return (
     <>

@@ -62,7 +62,13 @@ const Register = () => {
             life: 3000,
           });
         });
-    } 
+    } else{
+      toast.current.show({
+        severity: "error",
+        detail: 'Password and Confirm Password must be same',
+        life: 3000,
+      });
+    }
    
     }
 
@@ -139,7 +145,7 @@ const Register = () => {
                </div> 
             </form>
             <div className='p-3'>
-               <Button  label="Login" className='w-full' severity="success" />   
+               <Button  label="Login" onClick={()=>{navigate("/login");}} className='w-full' severity="success" />   
               
             </div>
          </Card>

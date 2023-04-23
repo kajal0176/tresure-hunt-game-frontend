@@ -14,30 +14,27 @@ import GameProblem from './User/pages/GameProblem';
 import GameResult from './User/pages/GameResult';
 import Login from './User/pages/auth/login';
 import Clue from './User/pages/Clue';
-
-
 //theme
-import "primereact/resources/themes/lara-light-indigo/theme.css";     
-    
+import "primereact/resources/themes/lara-light-indigo/theme.css";        
 //core
 import "primereact/resources/primereact.min.css";
-
 //icons
 import "primeicons/primeicons.css";                                         
 import Header from './components/Header';
 import Dashboard from './Admin/pages/Dashboard';
 import { ProtectedRoute } from './components/ProtectedRoutes';
 import Home from './User/pages/Home';
-import { setUser } from './reducer/auth.slice';
-import parseJwt from './utils/authUtils'
+import parseJwt from './utils/authUtils';
   
 import { useDispatch } from 'react-redux'
+import { setUser } from './reducer/auth.slice';
+
 
 function App() {
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const location = useLocation()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const currentPath = location.pathname

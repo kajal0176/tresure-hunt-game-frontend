@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import authSlice, { login, signup } from '../../../reducer/auth.slice';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
+
 const Login = () => {
 
   const toast = useRef();
@@ -119,7 +120,7 @@ const Login = () => {
                </div> 
             </form>
             <div className='p-3'>
-               <Button  label="SignUp" className='w-full' severity="success" />   
+               <Button  label="SignUp" onClick={()=>{navigate("/register");}} className='w-full' severity="success" />   
               
             </div>
          </Card>

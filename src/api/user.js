@@ -12,6 +12,15 @@ const API_GET_REGISTERDUSER = async () => {
     }
 }
 
+const API_GET_ACTIVE_USER = async (id) => {
+    try {
+        const resp = await axiosInstance.get(`/userInfo/${id}`);
+        return resp;
+    } catch (err) {
+        console.log(err);
+        throw err
+    }
+}
 
 const API_POST_USERINFO = async (data) => {
     try {
@@ -42,4 +51,4 @@ const API_GET_USERINFO = async () => {
         throw err
     }
 }
-export { API_GET_REGISTERDUSER,API_GET_USERINFO,API_POST_USERINFO,API_PUT_USERINFO };
+export { API_GET_REGISTERDUSER,API_GET_USERINFO,API_POST_USERINFO,API_PUT_USERINFO,API_GET_ACTIVE_USER };
